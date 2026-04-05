@@ -191,11 +191,6 @@ export function LandingPage() {
           <li><a href="#engagements">Engagements</a></li>
           <li><a href="#references">Références</a></li>
           <li><a href="#contact" className="lp-nav-cta">Nous contacter</a></li>
-          <li>
-            <a href="/espace-prestataire/login" className="lp-nav-presta">
-              Espace prestataire
-            </a>
-          </li>
         </ul>
       </nav>
 
@@ -444,14 +439,6 @@ export function LandingPage() {
               </div>
               <div className="lp-contact-note">
                 <p><strong>Modalités acceptées :</strong> Titre de Travail Simplifié (TTS) ou sur réception de facture. Une convention est établie avant toute mission.</p>
-              </div>
-              <div className="lp-presta-link">
-                <a href="/espace-prestataire/login" className="btn btn-secondary" style={{ fontSize: '.85rem', marginTop: '1.5rem' }}>
-                  Espace prestataire →
-                </a>
-                <p style={{ fontSize: '.78rem', color: 'var(--muted)', marginTop: '.6rem' }}>
-                  Retranscripteurs et correcteurs : accédez à vos missions et déposez vos fichiers ici.
-                </p>
               </div>
             </Reveal>
 
