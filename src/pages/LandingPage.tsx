@@ -199,7 +199,7 @@ export function LandingPage() {
         <div className="lp-hero-dots" />
         <div className="lp-hero-orb" />
         <div className="lp-hero-content">
-          <div className="lp-hero-tag">Prestataire de confiance depuis 25 ans</div>
+          <div className="lp-hero-tag">8 ans d'expérience en retranscription professionnelle</div>
           <h1 className="lp-hero-title">
             La parole captée<span className="dot">.</span><br />
             Le mot <em>juste</em><span className="dot">.</span><br />
@@ -209,7 +209,7 @@ export function LandingPage() {
             A2C assure la retranscription professionnelle de vos réunions de CE, CHSCT et assemblées — avec rigueur, confidentialité absolue et dans les délais convenus.
           </p>
           <div className="lp-hero-pills">
-            {['Délais garantis', 'Confidentialité totale', 'Relecture comparative', 'Times 12 · Interligne simple'].map((p) => (
+            {['Délais garantis', 'Confidentialité totale', 'Relecture comparative', 'Times/Comic 12 · Interligne 1,5'].map((p) => (
               <div key={p} className="lp-pill">{p}</div>
             ))}
           </div>
@@ -219,7 +219,7 @@ export function LandingPage() {
         </div>
         <div className="lp-hero-stats">
           <div className="lp-hstat">
-            <div className="lp-hstat-n"><Counter target={25} suffix=" ans" /></div>
+            <div className="lp-hstat-n"><Counter target={8} suffix=" ans" /></div>
             <div className="lp-hstat-l">d'expérience</div>
           </div>
           <div className="lp-hstat">
@@ -239,9 +239,9 @@ export function LandingPage() {
           <div className="lp-steps">
             {[
               { n: '1', t: 'Réception du dossier', d: 'Vous transmettez le fichier son et, si disponible, la prise de notes de séance. Les deux supports se complètent pour une retranscription optimale.' },
-              { n: '2', t: 'Attribution & retranscription', d: 'Un retranscripteur qualifié prend en charge votre dossier sous convention. Le document est rendu en Times New Roman 12, interligne simple.' },
-              { n: '3', t: 'Relecture & correction', d: 'En cas de corrections importantes, un relecteur intervient. Vous recevez le fichier corrigé et sa version comparative pour une transparence totale.' },
-              { n: '4', t: 'Livraison & facturation', d: 'Le document final vous est remis dans les délais contractuels. Règlement en Titre de Travail Simplifié ou sur réception de facture.' },
+              { n: '2', t: 'Attribution & retranscription', d: 'Votre dossier est traité sous convention de confidentialité. Le document est rendu en Times 12 ou Comic 12, pages numérotées, interligne 1,5, au format Word.' },
+              { n: '3', t: 'Relecture & correction', d: 'En cas de corrections importantes, vous recevez le fichier corrigé et sa version comparative pour une transparence totale.' },
+              { n: '4', t: 'Livraison & facturation', d: 'Le document final vous est remis dans les délais convenus. La facture est émise le lendemain de la réception du PV. Règlement par chèque ou virement.' },
             ].map((s, i) => (
               <Reveal key={s.n} delay={i * 0.1}>
                 <div className="lp-step">
@@ -261,7 +261,7 @@ export function LandingPage() {
           <Reveal>
             <span className="lp-tag">Grille tarifaire</span>
             <h2 className="lp-title">Des tarifs <em>clairs</em> et transparents</h2>
-            <p className="lp-subtitle">Format livré : Times New Roman corps 12, interligne simple. Tarification forfaitaire par tranche de pages.</p>
+            <p className="lp-subtitle">Format livré : Times 12 ou Comic 12, pages numérotées, interligne 1,5. Tarification forfaitaire par tranche de pages.</p>
           </Reveal>
 
           <div className="lp-tarif-grid">
@@ -276,25 +276,42 @@ export function LandingPage() {
                   </div>
                 </div>
                 <div className="lp-card-body">
-                  <table className="lp-table">
-                    <thead><tr><th>Volume</th><th>Tranche</th><th>Tarif</th></tr></thead>
+                  <div style={{ fontSize: '.78rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.06em', marginBottom: '.6rem', color: 'var(--navy)' }}>
+                    Avec prise de notes en séance <span style={{ fontWeight: 400, color: 'var(--muted)' }}>(+ 20 € / heure)</span>
+                  </div>
+                  <table className="lp-table" style={{ marginBottom: '1.4rem' }}>
+                    <thead><tr><th>Pages</th><th>Forfait</th></tr></thead>
                     <tbody>
                       {[
-                        ['1 – 9 pages',    'Petite tranche',   '50 €'],
-                        ['10 – 20 pages',  'Forfait standard', '100 €'],
-                        ['21 – 30 pages',  'Tranche basse',    '150 €'],
-                        ['31 – 40 pages',  'Tranche haute',    '200 €'],
-                        ['41 – 50 pages',  'Tranche basse',    '250 €'],
-                        ['51 – 60 pages',  'Tranche haute',    '300 €'],
-                        ['61 – 70 pages',  'Tranche basse',    '350 €'],
-                        ['71 – 80 pages',  'Tranche haute',    '400 €'],
-                        ['81 – 90 pages',  'Tranche basse',    '450 €'],
-                        ['91 – 100 pages', 'Tranche haute',    '500 €'],
-                      ].map(([v, t, p]) => (
-                        <tr key={v}><td>{v}</td><td>{t}</td><td>{p}</td></tr>
+                        ['20 – 40 pages',  '400 €'],
+                        ['41 – 60 pages',  '600 €'],
+                        ['61 – 80 pages',  '700 €'],
+                        ['81 – 100 pages', '800 €'],
+                      ].map(([v, p]) => (
+                        <tr key={v}><td>{v}</td><td>{p}</td></tr>
                       ))}
                     </tbody>
                   </table>
+
+                  <div style={{ fontSize: '.78rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.06em', marginBottom: '.6rem', color: 'var(--navy)' }}>
+                    Sans prise de notes en séance
+                  </div>
+                  <table className="lp-table">
+                    <thead><tr><th>Pages</th><th>Forfait</th></tr></thead>
+                    <tbody>
+                      {[
+                        ['20 – 40 pages', '400 €'],
+                        ['41 – 60 pages', '550 €'],
+                        ['61 – 80 pages', '750 €'],
+                      ].map(([v, p]) => (
+                        <tr key={v}><td>{v}</td><td>{p}</td></tr>
+                      ))}
+                    </tbody>
+                  </table>
+
+                  <div style={{ marginTop: '1.2rem', padding: '.8rem 1rem', background: 'rgba(0,0,0,.03)', borderRadius: 4, fontSize: '.82rem', color: 'var(--muted)', lineHeight: 1.6 }}>
+                    <strong style={{ color: 'var(--navy)' }}>Retranscription retravaillée (avec synthèse) :</strong> forfait ci-dessus + 50 à 100 € selon le volume de pages.
+                  </div>
                 </div>
               </div>
             </Reveal>
@@ -312,15 +329,17 @@ export function LandingPage() {
                   </div>
                   <div className="lp-card-body">
                     {[
-                      ["Jusqu'à 1 heure de son", '≤ 7 jours'],
-                      ['2 à 4 heures de son',    '≤ 18 jours'],
-                      ['Plus de 4 heures',        '≤ 25 jours'],
+                      ['Fichier standard',   '2 semaines'],
+                      ['Fichier de 4 heures', '3 semaines'],
                     ].map(([d, b]) => (
                       <div key={d} className="lp-delai-row">
                         <span className="lp-delai-dur">{d}</span>
                         <span className="lp-delai-badge">{b}</span>
                       </div>
                     ))}
+                    <div style={{ marginTop: '1rem', fontSize: '.8rem', color: 'var(--muted)', lineHeight: 1.6 }}>
+                      Délai décompté à partir du lendemain de la remise du fichier son. PV livré au format Word.
+                    </div>
                   </div>
                 </div>
               </Reveal>
@@ -336,15 +355,17 @@ export function LandingPage() {
                   </div>
                   <div className="lp-card-body">
                     {[
-                      { tag: 'CE',           text: 'Règlement 2 à 3 semaines après émission de la facture.' },
-                      { tag: 'CHSCT',        text: 'Délai maximum de 2 mois. Si trésorerie disponible, paiement anticipé un mois après.' },
-                      { tag: 'TTS / Facture',text: 'Titre de Travail Simplifié ou règlement sur réception de facture selon convention.' },
+                      { tag: 'Chèque',   text: 'Règlement par chèque à l\'ordre de l\'Association Deuxième Chance.' },
+                      { tag: 'Virement', text: 'Règlement par virement bancaire.' },
                     ].map(({ tag, text }) => (
                       <div key={tag} className="lp-reg-row">
                         <span className="lp-reg-tag">{tag}</span>
                         <span className="lp-reg-text">{text}</span>
                       </div>
                     ))}
+                    <div style={{ marginTop: '1rem', fontSize: '.8rem', color: 'var(--muted)', lineHeight: 1.6 }}>
+                      La facture est émise le lendemain de la réception du PV.
+                    </div>
                   </div>
                 </div>
               </Reveal>
@@ -368,7 +389,7 @@ export function LandingPage() {
               { icon: 'M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7 M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4z', t: 'Relecture comparative', d: 'En cas de corrections importantes, vous recevez les deux versions pour une transparence totale.' },
               { icon: 'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2 M12 11a4 4 0 100-8 4 4 0 000 8z', t: 'Interlocutrice dédiée', d: 'Mme Kpodar Muriel suit personnellement chaque dossier. Un seul contact, une relation durable.' },
               { icon: 'M9 12l2 2 4-4 M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z', t: 'Convention systématique', d: 'Un cadre contractuel est établi avec chaque retranscripteur pour garantir qualité et responsabilités.' },
-              { icon: 'M22 12h-4l-3 9L9 3l-3 9H2', t: '25 ans d\'expertise', d: 'Deux décennies et demie au service d\'entreprises, de CE et de CHSCT exigeants.' },
+              { icon: 'M22 12h-4l-3 9L9 3l-3 9H2', t: '8 ans d\'expertise', d: 'Au service d\'entreprises et d\'institutions telles que le GEMAG, la CAF et EDF pour leurs réunions de CE, CHSCT, CSP et conseils de discipline.' },
             ].map((e, i) => (
               <Reveal key={e.t} delay={i * 0.07}>
                 <div className="lp-eng-card">
