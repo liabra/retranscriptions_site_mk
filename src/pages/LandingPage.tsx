@@ -389,7 +389,7 @@ export function LandingPage() {
               { icon: 'M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7 M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4z', t: 'Relecture comparative', d: 'En cas de corrections importantes, vous recevez les deux versions pour une transparence totale.' },
               { icon: 'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2 M12 11a4 4 0 100-8 4 4 0 000 8z', t: 'Interlocutrice dédiée', d: 'Mme Kpodar Muriel suit personnellement chaque dossier. Un seul contact, une relation durable.' },
               { icon: 'M9 12l2 2 4-4 M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z', t: 'Convention systématique', d: 'Un cadre contractuel est établi avec chaque retranscripteur pour garantir qualité et responsabilités.' },
-              { icon: 'M22 12h-4l-3 9L9 3l-3 9H2', t: '8 ans d\'expertise', d: 'Au service d\'entreprises et d\'institutions telles que le GEMAG, la CAF et EDF pour leurs réunions de CE, CHSCT, CSP et conseils de discipline.' },
+              { icon: 'M22 12h-4l-3 9L9 3l-3 9H2', t: '8 ans d\'expertise', d: 'Au service d\'entreprises et d\'institutions telles que le GEMAG, la CAF et EDF pour leurs réunions de CE, CHSCT, CSSCT, CSP et conseils de discipline.' },
             ].map((e, i) => (
               <Reveal key={e.t} delay={i * 0.07}>
                 <div className="lp-eng-card">
@@ -457,9 +457,6 @@ export function LandingPage() {
                     </div>
                   </div>
                 ))}
-              </div>
-              <div className="lp-contact-note">
-                <p><strong>Modalités acceptées :</strong> Titre de Travail Simplifié (TTS) ou sur réception de facture. Une convention est établie avant toute mission.</p>
               </div>
             </Reveal>
 
