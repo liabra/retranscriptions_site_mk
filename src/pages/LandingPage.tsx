@@ -259,58 +259,36 @@ export function LandingPage() {
       <section id="tarifs" className="lp-section lp-bg-paper">
         <div className="lp-container">
           <Reveal>
-            <span className="lp-tag">Grille tarifaire</span>
-            <h2 className="lp-title">Des tarifs <em>clairs</em> et transparents</h2>
-            <p className="lp-subtitle">Format livré : Times 12 ou Comic 12, pages numérotées, interligne 1,5. Tarification forfaitaire par tranche de pages.</p>
+            <span className="lp-tag">Tarifs</span>
+            <h2 className="lp-title">Une tarification <em>adaptée</em> à votre besoin</h2>
+            <p className="lp-subtitle">Chaque mission est différente. Contactez-nous pour obtenir un devis personnalisé, sans engagement.</p>
           </Reveal>
 
           <div className="lp-tarif-grid">
-            {/* Pages */}
+            {/* Fourchette tarifaire */}
             <Reveal delay={0.08}>
               <div className="lp-card">
                 <div className="lp-card-head">
                   <Icon path="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8" />
                   <div>
-                    <div className="lp-card-title">Tarification au nombre de pages</div>
-                    <div className="lp-card-sub">Forfait tout compris</div>
+                    <div className="lp-card-title">Tarification forfaitaire</div>
+                    <div className="lp-card-sub">Selon le volume et la complexité</div>
                   </div>
                 </div>
                 <div className="lp-card-body">
-                  <div style={{ fontSize: '.78rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.06em', marginBottom: '.6rem', color: 'var(--navy)' }}>
-                    Avec prise de notes en séance <span style={{ fontWeight: 400, color: 'var(--muted)' }}>(+ 20 € / heure)</span>
+                  <div style={{ textAlign: 'center', padding: '1.6rem 1rem' }}>
+                    <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em' }}>
+                      400 € – 800 €
+                    </div>
+                    <div style={{ fontSize: '.88rem', color: 'var(--muted)', marginTop: '.5rem', lineHeight: 1.6 }}>
+                      Fourchette indicative selon le nombre de pages,<br />la formule choisie et les options retenues.
+                    </div>
                   </div>
-                  <table className="lp-table" style={{ marginBottom: '1.4rem' }}>
-                    <thead><tr><th>Pages</th><th>Forfait</th></tr></thead>
-                    <tbody>
-                      {[
-                        ['20 – 40 pages',  '400 €'],
-                        ['41 – 60 pages',  '600 €'],
-                        ['61 – 80 pages',  '700 €'],
-                        ['81 – 100 pages', '800 €'],
-                      ].map(([v, p]) => (
-                        <tr key={v}><td>{v}</td><td>{p}</td></tr>
-                      ))}
-                    </tbody>
-                  </table>
-
-                  <div style={{ fontSize: '.78rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.06em', marginBottom: '.6rem', color: 'var(--navy)' }}>
-                    Sans prise de notes en séance
+                  <div style={{ padding: '1rem', background: 'rgba(0,0,0,.03)', borderRadius: 4, fontSize: '.84rem', color: 'var(--muted)', lineHeight: 1.7 }}>
+                    Pour obtenir un tarif précis adapté à votre situation, le mieux est de contacter directement notre équipe par e-mail à <strong style={{ color: 'var(--navy)' }}>contact@a2c-retranscription.fr</strong> ou via le formulaire ci-dessous. Nous vous répondons dans les meilleurs délais.
                   </div>
-                  <table className="lp-table">
-                    <thead><tr><th>Pages</th><th>Forfait</th></tr></thead>
-                    <tbody>
-                      {[
-                        ['20 – 40 pages', '400 €'],
-                        ['41 – 60 pages', '550 €'],
-                        ['61 – 80 pages', '750 €'],
-                      ].map(([v, p]) => (
-                        <tr key={v}><td>{v}</td><td>{p}</td></tr>
-                      ))}
-                    </tbody>
-                  </table>
-
-                  <div style={{ marginTop: '1.2rem', padding: '.8rem 1rem', background: 'rgba(0,0,0,.03)', borderRadius: 4, fontSize: '.82rem', color: 'var(--muted)', lineHeight: 1.6 }}>
-                    <strong style={{ color: 'var(--navy)' }}>Retranscription retravaillée (avec synthèse) :</strong> forfait ci-dessus + 50 à 100 € selon le volume de pages.
+                  <div style={{ marginTop: '1.2rem', textAlign: 'center' }}>
+                    <a href="#contact" className="lp-btn">Demander un devis</a>
                   </div>
                 </div>
               </div>
