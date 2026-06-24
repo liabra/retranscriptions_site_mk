@@ -328,3 +328,49 @@
   .lp-section   { padding: 5rem 0; }
   .lp-hero-title { font-size: 2.5rem; }
 }
+
+/* ── Sigle avec infobulle ── */
+.lp-abbr {
+  position: relative;
+  border-bottom: 1px dotted currentColor;
+  cursor: help;
+  outline: none;
+}
+.lp-abbr-tip {
+  position: absolute;
+  bottom: 145%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--navy, #1f2d27);
+  color: #fff;
+  padding: .55rem .8rem;
+  border-radius: 6px;
+  font-size: .78rem;
+  line-height: 1.45;
+  font-weight: 400;
+  width: max-content;
+  max-width: 260px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 60;
+  box-shadow: 0 8px 28px rgba(0,0,0,.25);
+  pointer-events: none;
+}
+.lp-abbr-tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--navy, #1f2d27);
+}
+.lp-abbr:hover .lp-abbr-tip,
+.lp-abbr:focus .lp-abbr-tip,
+.lp-abbr:focus-within .lp-abbr-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}

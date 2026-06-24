@@ -66,11 +66,38 @@ const Icon = ({ path, size = 24 }: { path: string; size?: number }) => (
   </svg>
 )
 
+// ── Sigle avec définition au survol ─────────────────────────────────────────
+function Abbr({ children, title }: { children: React.ReactNode; title: string }) {
+  return (
+    <span className="lp-abbr" tabIndex={0}>
+      {children}
+      <span className="lp-abbr-tip" role="tooltip">{title}</span>
+    </span>
+  )
+}
+
 // ── Contact form ────────────────────────────────────────────────────────────
 function ContactForm() {
   const [sent, setSent] = useState(false)
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const data = new FormData(e.currentTarget)
+    const get = (k: string) => (data.get(k) as string) || ''
+    const corps = [
+      `Prénom : ${get('prenom')}`,
+      `Nom : ${get('nom')}`,
+      `Email : ${get('email')}`,
+      `Téléphone : ${get('tel')}`,
+      `Type de structure : ${get('structure')}`,
+      `Durée du fichier son : ${get('duree')}`,
+      `Nombre de pages estimé : ${get('pages')}`,
+      '',
+      'Message :',
+      get('message'),
+    ].join('\n')
+    const sujet = `Demande de devis — ${get('prenom')} ${get('nom')}`.trim()
+    window.location.href =
+      `mailto:ia_ia75@hotmail.com?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`
     setSent(true)
   }
   if (sent) return (
@@ -80,10 +107,10 @@ function ContactForm() {
     }}>
       <div style={{ fontSize: 52, marginBottom: 12 }}>✅</div>
       <h3 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: '1.8rem', marginBottom: '.5rem' }}>
-        Demande envoyée !
+        Votre demande est prête
       </h3>
       <p style={{ color: 'var(--muted)', fontSize: '.92rem' }}>
-        Notre équipe vous recontactera dans les meilleurs délais.
+        Votre logiciel de messagerie s'est ouvert avec votre demande pré-remplie. Vérifiez puis cliquez sur « Envoyer » pour nous la transmettre.
       </p>
     </div>
   )
@@ -96,24 +123,24 @@ function ContactForm() {
         <div className="fg-row">
           <div className="fg">
             <label htmlFor="prenom">Prénom</label>
-            <input id="prenom" type="text" placeholder="Marie" required />
+            <input id="prenom" name="prenom" type="text" placeholder="Marie" required />
           </div>
           <div className="fg">
             <label htmlFor="nom">Nom</label>
-            <input id="nom" type="text" placeholder="Dupont" required />
+            <input id="nom" name="nom" type="text" placeholder="Dupont" required />
           </div>
         </div>
         <div className="fg">
           <label htmlFor="email">Email professionnel</label>
-          <input id="email" type="email" placeholder="m.dupont@entreprise.fr" required />
+          <input id="email" name="email" type="email" placeholder="m.dupont@entreprise.fr" required />
         </div>
         <div className="fg">
           <label htmlFor="tel">Téléphone</label>
-          <input id="tel" type="tel" placeholder="06 XX XX XX XX" />
+          <input id="tel" name="tel" type="tel" placeholder="06 XX XX XX XX" />
         </div>
         <div className="fg">
           <label htmlFor="structure">Type de structure</label>
-          <select id="structure">
+          <select id="structure" name="structure">
             <option value="">— Sélectionnez —</option>
             <option>Comité d'Entreprise (CE)</option>
             <option>CHSCT / CSSCT</option>
@@ -125,7 +152,7 @@ function ContactForm() {
         <div className="fg-row">
           <div className="fg">
             <label htmlFor="duree">Durée du fichier son</label>
-            <select id="duree">
+            <select id="duree" name="duree">
               <option value="">— Sélectionnez —</option>
               <option>Moins d'1 heure</option>
               <option>1 à 2 heures</option>
@@ -136,7 +163,7 @@ function ContactForm() {
           </div>
           <div className="fg">
             <label htmlFor="pages">Nombre de pages estimé</label>
-            <select id="pages">
+            <select id="pages" name="pages">
               <option value="">— Sélectionnez —</option>
               <option>1 – 9 pages</option>
               <option>10 – 20 pages</option>
@@ -150,7 +177,7 @@ function ContactForm() {
         </div>
         <div className="fg">
           <label htmlFor="message">Votre message</label>
-          <textarea id="message" placeholder="Décrivez votre besoin, le contexte de la réunion, les délais souhaités…" />
+          <textarea id="message" name="message" placeholder="Décrivez votre besoin, le contexte de la réunion, les délais souhaités…" />
         </div>
         <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', padding: '.95rem', fontSize: '.9rem' }}>
           Envoyer ma demande →
@@ -199,17 +226,21 @@ export function LandingPage() {
         <div className="lp-hero-dots" />
         <div className="lp-hero-orb" />
         <div className="lp-hero-content">
-          <div className="lp-hero-tag">8 ans d'expérience en retranscription professionnelle</div>
+          <div className="lp-hero-tag">15 ans d'expérience en retranscription professionnelle</div>
           <h1 className="lp-hero-title">
             La parole captée<span className="dot">.</span><br />
             Le mot <em>juste</em><span className="dot">.</span><br />
             La trace fidèle<span className="dot">.</span>
           </h1>
           <p className="lp-hero-sub">
-            A2C assure la retranscription professionnelle de vos réunions de CE, CHSCT et assemblées — avec rigueur, confidentialité absolue et dans les délais convenus.
+            A2C assure la retranscription professionnelle de vos réunions de{' '}
+            <Abbr title="Comité Social et Économique">CSE</Abbr>,{' '}
+            <Abbr title="Comité d'Entreprise">CE</Abbr>,{' '}
+            <Abbr title="Comité d'Hygiène, de Sécurité et des Conditions de Travail">CHSCT</Abbr>,
+            assemblées et réunions syndicales — avec rigueur, confidentialité absolue et dans les délais convenus.
           </p>
           <div className="lp-hero-pills">
-            {['Délais garantis', 'Confidentialité totale', 'Relecture comparative', 'Times/Comic 12 · Interligne 1,5'].map((p) => (
+            {['Délais garantis', 'Confidentialité totale', 'Relecture comparative', 'Comic 12 · Interligne 1,5', 'Français & anglais'].map((p) => (
               <div key={p} className="lp-pill">{p}</div>
             ))}
           </div>
@@ -219,7 +250,7 @@ export function LandingPage() {
         </div>
         <div className="lp-hero-stats">
           <div className="lp-hstat">
-            <div className="lp-hstat-n"><Counter target={8} suffix=" ans" /></div>
+            <div className="lp-hstat-n"><Counter target={15} suffix=" ans" /></div>
             <div className="lp-hstat-l">d'expérience</div>
           </div>
           <div className="lp-hstat">
@@ -238,9 +269,9 @@ export function LandingPage() {
           </Reveal>
           <div className="lp-steps">
             {[
-              { n: '1', t: 'Réception du dossier', d: 'Vous transmettez le fichier son et, si disponible, la prise de notes de séance. Les deux supports se complètent pour une retranscription optimale.' },
-              { n: '2', t: 'Attribution & retranscription', d: 'Votre dossier est traité sous convention de confidentialité. Le document est rendu en Times 12 ou Comic 12, pages numérotées, interligne 1,5, au format Word.' },
-              { n: '3', t: 'Relecture & correction', d: 'En cas de corrections importantes, vous recevez le fichier corrigé et sa version comparative pour une transparence totale.' },
+              { n: '1', t: 'Réception du dossier', d: 'Vous transmettez le fichier son et, si disponible, la prise de notes de séance. Selon vos besoins et nos disponibilités, nous pouvons aussi envoyer une personne sur place pour assurer la prise de notes.' },
+              { n: '2', t: 'Attribution & retranscription', d: 'Votre dossier est traité sous convention de confidentialité. Le document est rendu en Comic 12, pages numérotées, interligne 1,5, au format Word. Retranscription possible en français comme en anglais.' },
+              { n: '3', t: 'Relecture & correction', d: 'Votre PV est relu et modifié si besoin par un correcteur. En cas de corrections importantes, vous recevez le fichier corrigé et sa version comparative pour une transparence totale.' },
               { n: '4', t: 'Livraison & facturation', d: 'Le document final vous est remis dans les délais convenus. La facture est émise le lendemain de la réception du PV. Règlement par chèque ou virement.' },
             ].map((s, i) => (
               <Reveal key={s.n} delay={i * 0.1}>
@@ -271,17 +302,17 @@ export function LandingPage() {
                 <div className="lp-card-head">
                   <Icon path="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8" />
                   <div>
-                    <div className="lp-card-title">Tarification forfaitaire</div>
+                    <div className="lp-card-title">Tarification sur devis</div>
                     <div className="lp-card-sub">Selon le volume et la complexité</div>
                   </div>
                 </div>
                 <div className="lp-card-body">
                   <div style={{ textAlign: 'center', padding: '1.6rem 1rem' }}>
                     <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-.02em' }}>
-                      400 € – 800 €
+                      Sur devis
                     </div>
                     <div style={{ fontSize: '.88rem', color: 'var(--muted)', marginTop: '.5rem', lineHeight: 1.6 }}>
-                      Fourchette indicative selon le nombre de pages,<br />la formule choisie et les options retenues.
+                      Tarif établi selon le nombre de pages,<br />la formule choisie et les options retenues.
                     </div>
                   </div>
                   <div style={{ padding: '1rem', background: 'rgba(0,0,0,.03)', borderRadius: 4, fontSize: '.84rem', color: 'var(--muted)', lineHeight: 1.7 }}>
@@ -307,8 +338,9 @@ export function LandingPage() {
                   </div>
                   <div className="lp-card-body">
                     {[
-                      ['Fichier standard',   '2 semaines'],
-                      ['Fichier de 4 heures', '3 semaines'],
+                      ['Fichier de 2 h',     '2 semaines'],
+                      ['Fichier de 3 à 4 h', '3 semaines'],
+                      ['Urgence',            'Dès que possible'],
                     ].map(([d, b]) => (
                       <div key={d} className="lp-delai-row">
                         <span className="lp-delai-dur">{d}</span>
@@ -363,11 +395,11 @@ export function LandingPage() {
           <div className="lp-eng-grid">
             {[
               { icon: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z', t: 'Confidentialité absolue', d: 'Chaque retranscripteur signe une convention de confidentialité. Ce qui se dit en réunion reste strictement protégé.' },
-              { icon: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z M12 6v6l4 2', t: 'Délais contractuels', d: '7, 18 ou 25 jours selon la durée du fichier — un engagement ferme, pas une estimation.' },
+              { icon: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z M12 6v6l4 2', t: 'Délais contractuels', d: 'Délai adapté à la durée de votre audio, et respecté.' },
               { icon: 'M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7 M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4z', t: 'Relecture comparative', d: 'En cas de corrections importantes, vous recevez les deux versions pour une transparence totale.' },
               { icon: 'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2 M12 11a4 4 0 100-8 4 4 0 000 8z', t: 'Interlocutrice dédiée', d: 'Chaque dossier est suivi personnellement. Un seul contact, une relation durable.' },
               { icon: 'M9 12l2 2 4-4 M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z', t: 'Convention systématique', d: 'Un cadre contractuel est établi avec chaque retranscripteur pour garantir qualité et responsabilités.' },
-              { icon: 'M22 12h-4l-3 9L9 3l-3 9H2', t: '8 ans d\'expertise', d: 'Au service d\'entreprises et d\'institutions telles que le GEMAG, la CAF et EDF pour leurs réunions de CE, CHSCT, CSSCT, CSP et conseils de discipline.' },
+              { icon: 'M22 12h-4l-3 9L9 3l-3 9H2', t: '15 ans d\'expertise', d: 'Au service d\'entreprises et d\'institutions telles que le GEMAG, la CAF, Ebène, les syndicats, la CMCAS et EDF pour leurs réunions de CE, CHSCT, CSSCT, CSP et conseils de discipline.' },
             ].map((e, i) => (
               <Reveal key={e.t} delay={i * 0.07}>
                 <div className="lp-eng-card">
@@ -425,7 +457,7 @@ export function LandingPage() {
                 {[
                   { icon: 'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2 M12 11a4 4 0 100-8 4 4 0 000 8z', label: 'Contact', val: 'A2C Retranscription' },
                   { icon: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6', label: 'Email', val: 'contact@a2c-retranscription.fr' },
-                  { icon: 'M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.5 12a19.79 19.79 0 01-3.07-8.67A2 2 0 012.41 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.4a16 16 0 006.29 6.29l.77-.77a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z', label: 'Téléphone', val: 'À compléter' },
+                  { icon: 'M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.5 12a19.79 19.79 0 01-3.07-8.67A2 2 0 012.41 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.4a16 16 0 006.29 6.29l.77-.77a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z', label: 'Téléphone', val: '06 94 XX XX XX' },
                 ].map(({ icon, label, val }) => (
                   <div key={label} className="lp-ci-row">
                     <Icon path={icon} size={18} />
@@ -448,7 +480,7 @@ export function LandingPage() {
       {/* ── FOOTER ── */}
       <footer className="lp-footer">
         <a href="#" className="lp-logo">A2C <sup>retranscription</sup></a>
-        <p style={{ fontSize: '.76rem', color: 'rgba(255,255,255,.22)' }}>© 2025 A2C — Tous droits réservés</p>
+        <p style={{ fontSize: '.76rem', color: 'rgba(255,255,255,.22)' }}>© {new Date().getFullYear()} A2C — Tous droits réservés</p>
         <div style={{ display: 'flex', gap: '2rem' }}>
           {['Mentions légales', 'Confidentialité'].map((l) => (
             <a key={l} href="#" style={{ fontSize: '.74rem', color: 'rgba(255,255,255,.28)', textDecoration: 'none' }}>{l}</a>
